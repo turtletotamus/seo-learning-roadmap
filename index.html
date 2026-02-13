@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SEO 學習藍圖">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>SEO Learning Roadmap - Raymond</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --gray-900: #262626;
+            --gray-700: #404040;
+            --gray-600: #525252;
+            --gray-500: #737373;
+            --gray-400: #a3a3a3;
+            --gray-300: #d4d4d4;
+            --gray-200: #e5e5e5;
+            --gray-100: #f5f5f5;
+            --white: #fafafa;
+            --success: #10b981;
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --tab-height: 56px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans TC', sans-serif; background: var(--white); color: var(--black); line-height: 1.7; font-size: 15px; }
+        .app { height: 100vh; display: flex; flex-direction: column; }
+        .main-content { flex: 1; overflow-y: auto; padding-bottom: calc(var(--tab-height) + 20px); }
+        .tab-content { display: none; padding: 20px; }
+        .tab-content.active { display: block; }
+        .tab-bar { position: fixed; bottom: 0; left: 0; right: 0; height: var(--tab-height); background: var(--black); display: flex; z-index: 100; }
+        .tab-item { flex: 1; display: flex; align-items: center; justify-content: center; color: var(--gray-500); font-size: 0.8rem; cursor: pointer; }
+        .tab-item.active { color: var(--white); background: var(--gray-900); }
+        .header { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--black); }
+        .header-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+        .header h1 { font-size: 1.4rem; font-weight: 700; }
+        .joe-item { padding: 16px; border: 1px solid var(--gray-300); margin-bottom: 12px; display: flex; gap: 12px; cursor: pointer; }
+        .joe-status { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--gray-300); }
+        .joe-status.done { border-color: var(--success); color: var(--success); }
+        .joe-status.failed { border-color: var(--danger); color: var(--danger); }
+        .joe-status.note { border-color: var(--warning); color: var(--warning); }
+        .card { border: 1px solid var(--gray-300); margin-bottom: 12px; }
+        .card-header { padding: 14px 16px; background: var(--gray-100); cursor: pointer; display: flex; justify-content: space-between; }
+        .card.open .card-header { background: var(--black); color: var(--white); }
+        .card-body { display: none; padding: 16px; }
+        .card.open .card-body { display: block; }
+        .add-btn { width: 100%; padding: 14px; background: var(--black); color: var(--white); border: none; cursor: pointer; margin-top: 12px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .modal.show { display: flex; }
+        .modal-content { background: var(--white); padding: 24px; max-width: 500px; width: 100%; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid var(--gray-300); margin-bottom: 12px; }
+        .btn-primary, .btn-secondary { padding: 12px 24px; border: none; cursor: pointer; }
+        .btn-primary { background: var(--black); color: var(--white); }
+        .btn-secondary { background: var(--gray-300); }
+        .client-item { display: flex; justify-content: space-between; padding: 12px; border: 1px solid var(--gray-300); margin-bottom: 8px; }
+        .total-row { display: flex; justify-content: space-between; padding: 16px; background: var(--black); color: var(--white); margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="main-content">
+            <div id="tab-joe" class="tab-content active">
+                <div class="header"><div class="header-label">Joe's Framework</div><h1>核心原則</h1></div>
+                <div id="joe-checklist"></div>
+                <div id="joe-concepts"></div>
+            </div>
+            <div id="tab-status" class="tab-content">
+                <div class="header"><div class="header-label">Current Status</div><h1>現狀</h1></div>
+                <div class="card open"><div class="card-header" onclick="toggleCard(this)">客戶管理</div>
+                    <div class="card-body"><div id="clients"></div><button class="add-btn" onclick="showAddClient()">新增客戶</button></div>
+                </div>
+                <div class="card open"><div class="card-header" onclick="toggleCard(this)">月收入</div>
+                    <div class="card-body"><div id="income"></div><button class="add-btn" onclick="showAddIncome()">新增收入</button></div>
+                </div>
+            </div>
+            <div id="tab-learning" class="tab-content">
+                <div class="header"><div class="header-label">Learning Path</div><h1>學習藍圖</h1></div>
+                <div id="learning"></div>
+            </div>
+            <div id="tab-tasks" class="tab-content">
+                <div class="header"><div class="header-label">Tasks</div><h1>待辦清單</h1></div>
+                <div id="tasks"></div>
+            </div>
+        </div>
+        <nav class="tab-bar">
+            <a class="tab-item active" onclick="switchTab('joe')">Joe</a>
+            <a class="tab-item" onclick="switchTab('status')">現狀</a>
+            <a class="tab-item" onclick="switchTab('learning')">學習</a>
+            <a class="tab-item" onclick="switchTab('tasks')">待辦</a>
+        </nav>
+    </div>
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <h3>新增客戶</h3>
+            <input type="text" id="clientName" class="form-input" placeholder="客戶名">
+            <input type="text" id="projectName" class="form-input" placeholder="專案名">
+            <input type="number" id="monthlyFee" class="form-input" placeholder="月費">
+            <button class="btn-primary" onclick="saveClient()">儲存</button>
+            <button class="btn-secondary" onclick="closeModal('clientModal')">取消</button>
+        </div>
+    </div>
+    <div id="incomeModal" class="modal">
+        <div class="modal-content">
+            <h3>新增收入</h3>
+            <input type="text" id="incomeProject" class="form-input" placeholder="專案名稱">
+            <input type="number" id="incomeAmount" class="form-input" placeholder="金額">
+            <textarea id="incomeDesc" class="form-input" placeholder="作業內容"></textarea>
+            <button class="btn-primary" onclick="saveIncome()">儲存</button>
+            <button class="btn-secondary" onclick="closeModal('incomeModal')">取消</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
