@@ -69,33 +69,115 @@ async function toggleJoeStatus(id) {
     loadJoeChecklist();
 }
 
-// Joe's Core Concepts
+// Joe's Core Concepts（延伸版，用來複習）
 const joeConcepts = [
-    { title: '1. 高槓桿 vs 高執行', content: '專業服務分為高槓桿（可規模化）和高執行（需持續投入時間）。目標是從高執行走向高槓桿。付費規格品 > 付費進階商品。' },
-    { title: '2. 價值 vs 便宜', content: '客戶期待「超值」不等於「便宜」。降低客戶的總成本（時間、風險、溝通）比降低價格更重要。' },
-    { title: '3. 保護毛利', content: '保護毛利、保護毛利、保護毛利！付費進階商品看似毛利高，實際考慮時間成本後常常最低。' },
-    { title: '4. 市場侵蝕', content: '同樣內容的產品不能有高價又有低價。免費試吃品可以低價，但主軸產品不行。' },
-    { title: '5. 客戶組合', content: '永遠不要讓單一客戶占你年營收 25% 以上。理想：4 個客戶各占 25%。' },
-    { title: '6. Billable Hour', content: '專業工作者的時間不是全部都能計價。要區分「可計價時數」和「投資時數」。' },
-    { title: '7. 信任資產', content: '客戶購買專業服務的最大障礙是「不信任」。累積信任資產是長期經營的核心。' },
-    { title: '8. 免費試吃品的四個好', content: '免費試吃品必須「好搜尋、好分類、好傳播、好分享」。' },
-    { title: '9. 訂閱制的陷阱', content: '內容訂閱制可能是「一開始辛苦，將來更辛苦」的壞模式。' },
-    { title: '10. 五個流程', content: '個人品牌 → 篩選客戶 → 盤點商品 → 組合提案 → 議約議價' }
+    {
+        title: '1. 搞清楚市場與痛點',
+        related: '對應 02–06 集：市場認知與六種動機',
+        points: [
+            '專業服務的本質不是「賣技能」，而是幫客戶解決具體的痛點或達成明確的效益。',
+            '先分清楚：客戶是為了賺錢、省錢、解痛、圖爽、交差、避麻煩、還是迴避衝突而來。',
+            '沒有動機的人很難被說服，要把時間放在「本來就有痛、有事要解決的人」身上。'
+        ]
+    },
+    {
+        title: '2. 優化產品（商品設計）',
+        related: '對應 13–22 集：產品設計與免費試吃品',
+        points: [
+            '客戶買的不是你的技術，而是一個「看得懂、交付清楚」的解決方案。',
+            '用免費試吃品、付費規格品、高價客製的階梯，讓不同動機與預算的客戶都有合適入口。',
+            '商品設計要避免模糊：規格、交付物、時間、價格、驗收方式都要寫清楚。'
+        ]
+    },
+    {
+        title: '3. 建立個人品牌與正確發聲',
+        related: '對應 07–12、23–29 集：信任資產與個人品牌',
+        points: [
+            '個人品牌就是在客戶動機與時機具備時，他腦中第一個想到的人是你。',
+            '一開始先專注在一個清楚的形象與主題，不要一開始就當「什麼都寫」的雜牌軍。',
+            '文章、專欄、講座、案例分享，都是在慢慢累積信任資產，而不是立刻成交。'
+        ]
+    },
+    {
+        title: '4. 五個流程與客戶旅程',
+        related: '貫穿全課：個人品牌 → 篩選客戶 → 盤點商品 → 組合提案 → 議約議價',
+        points: [
+            '不要只看單一成交，而是把客戶從「認識你」到「成交」拆成五個流程來設計。',
+            '每一個流程都有對應要做的事：例如在「篩選客戶」階段先拒絕不合適的人。',
+            '當流程清楚，你就不會每個案子都從零開始瞎忙，而是照 SOP 走。'
+        ]
+    },
+    {
+        title: '5. 控制客戶組合',
+        related: '對應 34–36 集：客戶篩選與客戶組合',
+        points: [
+            '單一客戶年營收佔比不要超過 25%，理想狀態是 4 個客戶各佔 25%。',
+            '主動設計「我不要的客戶」清單（預算、態度、風格），拒絕錯的客戶就是保護未來。',
+            '用數字看風險：最大客戶佔比、前兩大佔比，當紅字亮起來就該調整。'
+        ]
+    },
+    {
+        title: '6. 增加利潤、控制風險',
+        related: '對應 19–22、47 集：定價與槓桿',
+        points: [
+            '真正的毛利不是看「收多少錢」，而是扣掉你投入的所有時間成本之後還剩多少。',
+            '盡量把服務往「高槓桿」移動：可重複、可教人做、可以標準化，就有機會放大。',
+            '風險不只來自客戶流失，也來自你自己被時間綁死、無法休息與成長。'
+        ]
+    },
+    {
+        title: '7. 信任資產與價值感',
+        related: '對應 07–09、31–33 集：信任資產與定價',
+        points: [
+            '大部分客戶無法分辨專業優劣，只能從頭銜、經歷、口碑與價格推估你的實力。',
+            '信任資產就是：別人肯掛你名字、願意公開推薦你、願意付你高價還會回頭。',
+            '產品定價會反過來塑造你的定位：永遠只有低價商品，就很難被當成專家。'
+        ]
+    },
+    {
+        title: '8. 免費試吃品的設計',
+        related: '對應 15–18 集：免費試吃品與內容策略',
+        points: [
+            '好的免費試吃品要「好搜尋、好分類、好傳播、好分享」，而不是亂發折價券。',
+            '免費內容要幫你過濾客戶：看完覺得「這就是我」的人留下來，其他人自然離開。',
+            '免費試吃品的目的，是累積信任資產與名單，不是立刻賺錢。'
+        ]
+    },
+    {
+        title: '9. 避免市場侵蝕',
+        related: '對應 48 集：「市場侵蝕」概念',
+        points: [
+            '同一組核心內容，不要同時賣高價又賣低價，會讓市場搞不清楚你的定位。',
+            '免費試吃品可以便宜，但主力商品要維持價格與價值感，避免自己打自己。',
+            '設計產品階梯時，要清楚區分：哪一階段在賣什麼深度，而不是只改價格。'
+        ]
+    },
+    {
+        title: '10. 重劍無鋒，大巧不工',
+        related: '對應 49 集：重劍無鋒，大巧不工',
+        points: [
+            '長期穩定的事業，大多來自對的結構與習慣，而不是一兩次的爆衝與奇招。',
+            '每天多做一點對的事：寫一篇好文章、優化一個流程、整理一個案例，時間會放大成果。',
+            '當你有流程、有產品階梯、有正確客戶組合，營收自然會反映你的累積。'
+        ]
+    }
 ];
 
 function loadJoeConcepts() {
-    const html = joeConcepts.map((concept, i) => `
-        <div class="card">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span style="font-size:0.85rem;font-weight:500">${concept.title}</span>
-                <span style="font-family:monospace">→</span>
-            </div>
-            <div class="card-body">
-                <div style="font-size:0.9rem;line-height:1.6;color:var(--gray-700)">${concept.content}</div>
-            </div>
+    const html = joeConcepts.map(concept => `
+        <div style="margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--gray-200);">
+            <div style="font-size:0.9rem;font-weight:600;margin-bottom:4px;">${concept.title}</div>
+            <div style="font-size:0.75rem;color:var(--gray-500);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">${concept.related}</div>
+            <ul style="list-style:none;padding-left:0;font-size:0.9rem;color:var(--gray-700);line-height:1.7;">
+                ${concept.points.map(p => `<li style="position:relative;padding-left:14px;margin-bottom:6px;"><span style="position:absolute;left:0;color:var(--gray-400);">·</span>${p}</li>`).join('')}
+            </ul>
         </div>
     `).join('');
-    document.getElementById('joe-concepts').innerHTML = '<div style="margin-top:32px"><div class="header"><div class="header-label">Core Concepts</div><h1>核心觀念複習</h1></div>' + html + '</div>';
+    document.getElementById('joe-concepts').innerHTML =
+        '<div style="margin-top:28px">' +
+        '<div class="header"><div class="header-label">Core Concepts</div><h1>核心觀念複習</h1></div>' +
+        html +
+        '</div>';
 }
 
 // Clients Management
@@ -249,17 +331,17 @@ const learningData = {
         why: '這是你「文章包」的核心競爭力。直接影響內容品質跟客戶滿意度。',
         phases: {
             '階段 1：建立基礎概念（1-2 個月）': [
-                { key: 'interview-book-1', text: '《價值主張年代》', detail: '系統化圖表工具' },
-                { key: 'interview-book-2', text: '《故事行銷》', detail: 'SB7 框架' },
-                { key: 'interview-book-3', text: '《先問，為什麼？》', detail: '黃金圈法則' },
-                { key: 'interview-course-1', text: 'Coursera: Market Research', detail: 'IE Business School' },
+                { key: 'interview-book-1', text: '《價值主張年代》', type: '書籍 / Book', english: 'Value Proposition Design', detail: '系統化圖表工具，練習把客戶痛點與方案具體化' },
+                { key: 'interview-book-2', text: '《故事行銷》', type: '書籍 / Book', english: 'Building a StoryBrand', detail: 'SB7 框架，學會用故事結構說明客戶旅程' },
+                { key: 'interview-book-3', text: '《先問，為什麼？》', type: '書籍 / Book', english: 'Start With Why', detail: '黃金圈法則，練習從 Why 開始設計訪談問題' },
+                { key: 'interview-course-1', text: 'Coursera：Market Research and Consumer Behavior', type: '線上課程 / Course', english: 'Market Research and Consumer Behavior (IE Business School)', detail: '打底市場調查與質性研究的結構' },
             ],
             '階段 2：實戰練習（1-2 個月）': [
                 { key: 'interview-practice-1', text: '用 StoryBrand 框架訪談 1 個客戶' },
                 { key: 'interview-practice-2', text: '建立自己的訪談 SOP' },
             ],
             '階段 3：進階技能（選修）': [
-                { key: 'interview-advanced-1', text: 'IxDF: User Research Methods' },
+                { key: 'interview-advanced-1', text: 'IxDF：User Research Methods', type: '線上課程 / Course', english: 'Interaction Design Foundation – User Research Methods', detail: '進一步把訪談放到 UX 方法論的脈絡裡' },
             ]
         }
     },
@@ -268,9 +350,9 @@ const learningData = {
         why: '這是「方案 A」的核心。如果你不熟，會失去客戶信任。',
         phases: {
             '進修方向': [
-                { key: 'tech-seo-1', text: 'WordPress 效能優化' },
-                { key: 'tech-seo-2', text: 'Core Web Vitals 實戰' },
-                { key: 'tech-seo-3', text: '結構化資料（Schema Markup）' },
+                { key: 'tech-seo-1', text: 'WordPress 效能優化', type: '主題 / Topic', english: 'WordPress Performance Optimization', detail: '實作快取、圖片壓縮、外掛精簡、主機與 CDN 調整' },
+                { key: 'tech-seo-2', text: 'Core Web Vitals 實戰', type: '主題 / Topic', english: 'Core Web Vitals in Practice', detail: 'LCP / CLS / INP 指標與實際優化手法' },
+                { key: 'tech-seo-3', text: '結構化資料（Schema Markup）', type: '主題 / Topic', english: 'Schema Markup', detail: 'FAQ、Breadcrumb、Product 等實際標記與測試' },
             ]
         }
     },
@@ -279,13 +361,13 @@ const learningData = {
         why: '能讓你的報告更有價值（不只找問題，還能提供改善建議）。',
         phases: {
             '階段 1：建立基礎（1-2 個月）': [
-                { key: 'ux-book-1', text: '《絕對別讓使用者思考》' },
-                { key: 'ux-book-2', text: '《設計的心理學》' },
-                { key: 'ux-course-1', text: 'Google UX Design Certificate' },
+                { key: 'ux-book-1', text: '《絕對別讓使用者思考》', type: '書籍 / Book', english: "Don't Make Me Think", detail: '學會基本易用性原則與實務範例' },
+                { key: 'ux-book-2', text: '《設計的心理學》', type: '書籍 / Book', english: 'The Design of Everyday Things', detail: '從日常物品理解人因與介面設計' },
+                { key: 'ux-course-1', text: 'Google UX Design Certificate', type: '線上課程 / Course', english: 'Google UX Design Professional Certificate', detail: '系統性走過 UX 流程與產出物' },
             ],
             '階段 2：實戰應用': [
-                { key: 'ux-practice-1', text: '建立 UX 檢測 Checklist' },
-                { key: 'ux-practice-2', text: '用 Clarity 分析客戶網站' },
+                { key: 'ux-practice-1', text: '建立 UX 檢測 Checklist', type: '實作 / Practice', english: 'UX Heuristic Checklist', detail: '把常見 UX 原則整理成你自己的檢查表' },
+                { key: 'ux-practice-2', text: '用 Clarity 分析客戶網站', type: '實作 / Practice', english: 'Microsoft Clarity Session Analysis', detail: '從實際錄影與熱圖找出轉化問題' },
             ]
         }
     }
@@ -299,24 +381,26 @@ async function loadLearning() {
     const html = Object.entries(learningData).map(([skill, info]) => `
         <div class="card open">
             <div class="card-header" onclick="toggleCard(this)">
-                <span style="font-size:0.85rem;text-transform:uppercase">${info.priority}：${skill}</span>
-                <span style="font-family:monospace">→</span>
+                <span style="font-size:0.9rem;font-weight:500;">${skill}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--gray-500);">${info.priority}</span>
             </div>
             <div class="card-body">
-                <div style="margin-bottom:16px;padding:12px;background:var(--gray-100)">
+                <div style="margin-bottom:16px;padding:12px;background:var(--gray-100);border:1px solid var(--gray-200);">
                     <strong>為什麼重要：</strong><br>${info.why}
                 </div>
                 ${Object.entries(info.phases).map(([phase, items]) => `
                     <div style="margin-top:16px">
-                        <div style="font-family:monospace;font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;margin-bottom:10px">${phase}</div>
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;margin-bottom:8px;letter-spacing:0.06em;">${phase}</div>
                         ${items.map(item => {
                             const checked = progressMap[item.key] || false;
                             return `
-                                <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-200)">
+                                <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-200);">
                                     <div class="learning-checkbox ${checked ? 'checked' : ''}" onclick="toggleLearning('${item.key}')"></div>
-                                    <div style="flex:1;font-size:0.9rem">
+                                    <div style="flex:1;font-size:0.9rem;">
                                         <strong>${item.text}</strong>
-                                        ${item.detail ? `<div style="font-size:0.8rem;color:var(--gray-500);margin-top:2px">${item.detail}</div>` : ''}
+                                        ${item.english ? `<div style="font-size:0.8rem;color:var(--gray-500);margin-top:2px">${item.english}</div>` : ''}
+                                        ${item.type ? `<div style="font-size:0.75rem;color:var(--gray-500);margin-top:2px">${item.type}</div>` : ''}
+                                        ${item.detail ? `<div style="font-size:0.8rem;color:var(--gray-600);margin-top:4px">${item.detail}</div>` : ''}
                                     </div>
                                 </div>
                             `;
@@ -338,36 +422,36 @@ async function toggleLearning(key) {
     loadLearning();
 }
 
-// Tasks
+// Tasks：改成母任務 + 子任務，語氣簡化
 const tasksData = [
     {
-        id: 'task1-done',
-        title: '作業 1：實戰驗證技術檢測 SOP',
-        desc: '找一個網站實際跑一遍你的「50+ 檢測項目」。',
-        steps: [
-            '打開方案 A（基礎檢測）的檢測清單',
-            '一項一項實際操作，記錄需要的工具和時間',
-            '完成後跟 Claude 討論哪些可以自動化'
+        id: 'foundation',
+        title: '事業基礎打底',
+        desc: '先把目前的服務與結構站穩，再談放大。',
+        subtasks: [
+            { id: 't-found-1', label: '在「現狀」頁填好目前所有長期客戶與月費' },
+            { id: 't-found-2', label: '在「現狀」頁填入本月額外收入與作業內容' },
+            { id: 't-found-3', label: '檢查最大客戶佔比與前兩大佔比，寫下一句觀察' }
         ]
     },
     {
-        id: 'task2-done',
-        title: '作業 2：定義理想客戶 vs. 拒絕客戶',
-        desc: '建立客戶篩選機制。',
-        steps: [
-            '理想客戶是誰？（3-5 點）',
-            '要拒絕哪些客戶？（3-5 點）',
-            '篩選機制在銷售流程的哪個階段？'
+        id: 'client-fit',
+        title: '客戶篩選與定位',
+        desc: '弄清楚你要服務誰，也要清楚說 NO 給誰。',
+        subtasks: [
+            { id: 't-fit-1', label: '寫出 3–5 點「理想客戶長什麼樣子」' },
+            { id: 't-fit-2', label: '寫出 3–5 點「要拒絕的客戶特徵」' },
+            { id: 't-fit-3', label: '在筆記裡寫一份簡短的「禮貌拒絕話術」' }
         ]
     },
     {
-        id: 'task3-done',
-        title: '作業 3：重新思考文章包的定位',
-        desc: '釐清「深度協作」是否能外包。',
-        steps: [
-            '列出內容創作流程每個步驟的時間',
-            '標記哪些只有你能做，哪些可外包',
-            '計算外包後的時間節省'
+        id: 'ops',
+        title: '每天可以做的小事',
+        desc: '用很小很小的動作，推動事業往前一點點。',
+        subtasks: [
+            { id: 't-ops-1', label: '今天花 30 分鐘整理一個案例或學習重點，寫在自己的筆記裡' },
+            { id: 't-ops-2', label: '本週至少寫完一段 Landing Page 或文章的其中一小節' },
+            { id: 't-ops-3', label: '每週檢查一次「行動清單」，勾掉完成的、刪掉不重要的' }
         ]
     }
 ];
@@ -381,25 +465,57 @@ async function loadTasks() {
     const customTasks = customRaw ? JSON.parse(customRaw) : [];
     const allTasks = [...tasksData, ...customTasks];
     
-    const html = allTasks.map(task => `
-        <div class="card open">
-            <div class="card-header" onclick="toggleCard(this)">
-                <span style="font-size:0.85rem">${task.title}</span>
-                <span style="font-family:monospace">→</span>
-            </div>
-            <div class="card-body">
-                <div style="font-size:0.9rem;color:var(--gray-600);margin-bottom:12px">${task.desc}</div>
-                <div style="font-size:0.85rem;color:var(--gray-600)">
-                    ${task.steps.map((step, i) => `<div style="margin-bottom:4px">${i + 1}. ${step}</div>`).join('')}
+    const html = allTasks.map(task => {
+        if (task.custom) {
+            return `
+                <div class="card open">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span style="font-size:0.85rem">${task.title}</span>
+                        <span style="font-family:monospace">→</span>
+                    </div>
+                    <div class="card-body">
+                        <div style="font-size:0.9rem;color:var(--gray-600);margin-bottom:8px">${task.desc || ''}</div>
+                        <ul style="list-style:none;padding-left:0;font-size:0.85rem;color:var(--gray-700);">
+                            ${task.steps.map((s, i) => {
+                                const id = `${task.id}-sub-${i}`;
+                                const checked = !!statusMap[id];
+                                return `
+                                    <li style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                                        <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleTask('${id}', this.checked)">
+                                        <span>${s}</span>
+                                    </li>
+                                `;
+                            }).join('')}
+                        </ul>
+                        <button style="margin-top:8px;padding:6px 10px;font-size:0.75rem;border:1px solid var(--gray-300);background:white;cursor:pointer" onclick="deleteAction('${task.id}')">刪除這個行動</button>
+                    </div>
                 </div>
-                <label style="display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--gray-300);background:var(--gray-100);margin-top:12px;cursor:pointer">
-                    <input type="checkbox" ${statusMap[task.id] ? 'checked' : ''} onchange="toggleTask('${task.id}', this.checked)">
-                    <span style="font-size:0.85rem">已完成</span>
-                </label>
-                ${task.custom ? `<button style="margin-top:8px;padding:6px 10px;font-size:0.75rem;border:1px solid var(--gray-300);background:white;cursor:pointer" onclick="deleteAction('${task.id}')">刪除這個行動</button>` : ''}
+            `;
+        }
+
+        // 預設母任務
+        return `
+            <div class="card open">
+                <div class="card-header" onclick="toggleCard(this)">
+                    <span style="font-size:0.9rem;font-weight:500;">${task.title}</span>
+                </div>
+                <div class="card-body">
+                    <div style="font-size:0.9rem;color:var(--gray-600);margin-bottom:10px">${task.desc}</div>
+                    <ul style="list-style:none;padding-left:0;font-size:0.85rem;color:var(--gray-700);">
+                        ${task.subtasks.map(sub => {
+                            const checked = !!statusMap[sub.id];
+                            return `
+                                <li style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                                    <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleTask('${sub.id}', this.checked)">
+                                    <span>${sub.label}</span>
+                                </li>
+                            `;
+                        }).join('')}
+                    </ul>
+                </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
     
     document.getElementById('tasks').innerHTML = html;
 }

@@ -43,12 +43,12 @@
         .joe-status.done { border-color: var(--success); color: var(--success); }
         .joe-status.failed { border-color: var(--danger); color: var(--danger); }
         .joe-status.note { border-color: var(--warning); color: var(--warning); }
-        .card { border: 1px solid var(--gray-300); margin-bottom: 12px; }
-        .card-header { padding: 14px 16px; background: var(--gray-100); cursor: pointer; display: flex; justify-content: space-between; }
-        .card.open .card-header { background: var(--black); color: var(--white); }
+        .card { border: 1px solid var(--gray-200); margin-bottom: 12px; background: var(--white); }
+        .card-header { padding: 14px 16px; background: var(--gray-100); cursor: pointer; display: flex; justify-content: space-between; border-bottom: 1px solid var(--gray-200); }
+        .card.open .card-header { background: var(--gray-100); color: var(--black); box-shadow: inset 0 -1px 0 var(--gray-200); }
         .card-body { display: none; padding: 16px; }
         .card.open .card-body { display: block; }
-        .add-btn { width: 100%; padding: 14px; background: var(--black); color: var(--white); border: none; cursor: pointer; margin-top: 12px; }
+        .add-btn { width: 100%; padding: 12px; background: var(--gray-900); color: var(--white); border: none; cursor: pointer; margin-top: 12px; font-size: 0.85rem; }
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal.show { display: flex; }
         .modal-content { background: var(--white); padding: 24px; max-width: 500px; width: 100%; }
@@ -57,7 +57,7 @@
         .btn-primary { background: var(--black); color: var(--white); }
         .btn-secondary { background: var(--gray-300); }
         .client-item { display: flex; justify-content: space-between; padding: 12px; border: 1px solid var(--gray-300); margin-bottom: 8px; }
-        .total-row { display: flex; justify-content: space-between; padding: 16px; background: var(--black); color: var(--white); margin-bottom: 16px; }
+        .total-row { display: flex; justify-content: space-between; padding: 14px 16px; background: var(--gray-100); color: var(--black); margin-bottom: 16px; border: 1px solid var(--gray-200); }
     </style>
 </head>
 <body>
