@@ -3,14 +3,14 @@ const SUPABASE_URL = 'https://ufdmwakspvbmlycoynts.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmZG13YWtzcHZibWx5Y295bnRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5NjIxMTAsImV4cCI6MjA4NjUzODExMH0.zOSrXdgNtszAwRsJyoKK5vZsHAT6woDWa4hktmz6BGo';
 
 // Initialize Supabase Client
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Tab Switching
-function switchTab(tabName) {
+function switchTab(tabName, el) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + tabName).classList.add('active');
-    event.target.classList.add('active');
+    if (el) el.classList.add('active');
     
     if (tabName === 'joe') loadJoeChecklist();
     if (tabName === 'status') { loadClients(); loadIncome(); }
@@ -37,7 +37,7 @@ const joeItems = [
 ];
 
 async function loadJoeChecklist() {
-    const { data } = await supabase.from('joe_checklist').select('*');
+    const { data } = await supabaseClient.from('joe_checklist').select('*');
     const statusMap = {};
     if (data) data.forEach(item => statusMap[item.item_id] = item.status);
     
@@ -61,11 +61,11 @@ async function loadJoeChecklist() {
 
 async function toggleJoeStatus(id) {
     const itemId = 'joe-' + id;
-    const { data } = await supabase.from('joe_checklist').select('status').eq('item_id', itemId).single();
+    const { data } = await supabaseClient.from('joe_checklist').select('status').eq('item_id', itemId).single();
     const current = data?.status || '';
     const next = current === '' ? 'done' : current === 'done' ? 'failed' : current === 'failed' ? 'note' : '';
     
-    await supabase.from('joe_checklist').upsert({ item_id: itemId, status: next, updated_at: new Date() });
+    await supabaseClient.from('joe_checklist').upsert({ item_id: itemId, status: next, updated_at: new Date() });
     loadJoeChecklist();
 }
 
@@ -100,7 +100,7 @@ function loadJoeConcepts() {
 
 // Clients Management
 async function loadClients() {
-    const { data } = await supabase.from('clients').select('*').order('created_at', { ascending: false });
+    const { data } = await supabaseClient.from('clients').select('*').order('created_at', { ascending: false });
     
     if (!data || data.length === 0) {
         document.getElementById('clients').innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray-500)">尚無客戶資料</div>';
@@ -147,7 +147,7 @@ async function saveClient() {
         return;
     }
     
-    await supabase.from('clients').insert({ client_name: name, project_name: project, monthly_fee: fee });
+    await supabaseClient.from('clients').insert({ client_name: name, project_name: project, monthly_fee: fee });
     
     document.getElementById('clientName').value = '';
     document.getElementById('projectName').value = '';
@@ -158,7 +158,7 @@ async function saveClient() {
 
 async function deleteClient(id) {
     if (!confirm('確定要刪除這個客戶嗎？')) return;
-    await supabase.from('clients').delete().eq('id', id);
+    await supabaseClient.from('clients').delete().eq('id', id);
     loadClients();
 }
 
@@ -167,8 +167,8 @@ async function loadIncome() {
     const now = new Date();
     const month = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
     
-    const { data: clients } = await supabase.from('clients').select('monthly_fee');
-    const { data: extra } = await supabase.from('extra_income').select('*').eq('income_month', month);
+    const { data: clients } = await supabaseClient.from('clients').select('monthly_fee');
+    const { data: extra } = await supabaseClient.from('extra_income').select('*').eq('income_month', month);
     
     const fixedIncome = clients ? clients.reduce((sum, c) => sum + c.monthly_fee, 0) : 0;
     const extraIncome = extra ? extra.reduce((sum, e) => sum + e.amount, 0) : 0;
@@ -222,7 +222,7 @@ async function saveIncome() {
     const now = new Date();
     const month = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
     
-    await supabase.from('extra_income').insert({ 
+    await supabaseClient.from('extra_income').insert({ 
         project_name: project, 
         amount: amount, 
         description: desc,
@@ -238,7 +238,7 @@ async function saveIncome() {
 
 async function deleteIncome(id) {
     if (!confirm('確定要刪除這筆收入嗎？')) return;
-    await supabase.from('extra_income').delete().eq('id', id);
+    await supabaseClient.from('extra_income').delete().eq('id', id);
     loadIncome();
 }
 
@@ -292,7 +292,7 @@ const learningData = {
 };
 
 async function loadLearning() {
-    const { data } = await supabase.from('learning_progress').select('*');
+    const { data } = await supabaseClient.from('learning_progress').select('*');
     const progressMap = {};
     if (data) data.forEach(item => progressMap[item.item_key] = item.completed);
     
@@ -331,10 +331,10 @@ async function loadLearning() {
 }
 
 async function toggleLearning(key) {
-    const { data } = await supabase.from('learning_progress').select('completed').eq('item_key', key).single();
+    const { data } = await supabaseClient.from('learning_progress').select('completed').eq('item_key', key).single();
     const completed = data ? !data.completed : true;
     
-    await supabase.from('learning_progress').upsert({ item_key: key, completed: completed, updated_at: new Date() });
+    await supabaseClient.from('learning_progress').upsert({ item_key: key, completed: completed, updated_at: new Date() });
     loadLearning();
 }
 
@@ -373,7 +373,7 @@ const tasksData = [
 ];
 
 async function loadTasks() {
-    const { data } = await supabase.from('tasks').select('*');
+    const { data } = await supabaseClient.from('tasks').select('*');
     const statusMap = {};
     if (data) data.forEach(item => statusMap[item.task_id] = item.completed);
     
@@ -400,7 +400,7 @@ async function loadTasks() {
 }
 
 async function toggleTask(taskId, completed) {
-    await supabase.from('tasks').upsert({ task_id: taskId, completed: completed, updated_at: new Date() });
+    await supabaseClient.from('tasks').upsert({ task_id: taskId, completed: completed, updated_at: new Date() });
 }
 
 // Initialize
