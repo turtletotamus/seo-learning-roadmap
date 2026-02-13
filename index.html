@@ -64,12 +64,60 @@
     <div class="app">
         <div class="main-content">
             <div id="tab-joe" class="tab-content active">
-                <div class="header"><div class="header-label">Joe's Framework</div><h1>核心原則</h1></div>
+                <div class="header"><div class="header-label">JOE's Takeaway</div><h1>JOE 的重點</h1></div>
                 <div id="joe-checklist"></div>
                 <div id="joe-concepts"></div>
             </div>
             <div id="tab-status" class="tab-content">
                 <div class="header"><div class="header-label">Current Status</div><h1>現狀</h1></div>
+                <div class="card open">
+                    <div class="card-header" onclick="toggleCard(this)">
+                        <span>定位與產品總覽</span>
+                        <span style="font-family:monospace">→</span>
+                    </div>
+                    <div class="card-body">
+                        <div style="margin-bottom:16px">
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">核心定位</div>
+                            <div style="font-size:0.95rem;font-weight:500;line-height:1.6">
+                                專門幫助不懂網路的傳統老闆與新創業者，用 SEO 帶來客戶的陪伴式顧問
+                            </div>
+                        </div>
+                        <div style="margin-bottom:16px">
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">目標客群</div>
+                            <ul style="list-style:none;padding-left:0;font-size:0.9rem;color:var(--gray-700);">
+                                <li style="padding:4px 0;"><strong>60% 二代接班人</strong> — 30–40 歲，剛接班 1–3 年，想證明自己</li>
+                                <li style="padding:4px 0;"><strong>30% 新創業者</strong> — 25–35 歲，創業 1–2 年，預算有限但願意學</li>
+                                <li style="padding:4px 0;"><strong>10% 傳統老闆</strong> — 40–60 歲，決策慢但預算高</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px">產品清單</div>
+                            <div style="margin-bottom:10px;">
+                                <strong>免費試吃品</strong>
+                                <ul style="list-style:none;padding-left:0;font-size:0.85rem;color:var(--gray-700);margin-top:4px;">
+                                    <li style="padding:2px 0;">SEO 健康檢查清單（可下載 PDF）</li>
+                                    <li style="padding:2px 0;">部落格實戰案例文章</li>
+                                    <li style="padding:2px 0;">LinkedIn／社群教學貼文</li>
+                                </ul>
+                            </div>
+                            <div style="margin-bottom:10px;">
+                                <strong>付費規格品</strong>
+                                <ul style="list-style:none;padding-left:0;font-size:0.85rem;color:var(--gray-700);margin-top:4px;">
+                                    <li style="padding:2px 0;">方案 A：基礎技術檢測與報告</li>
+                                    <li style="padding:2px 0;">方案 B：SEO 文章策略包</li>
+                                    <li style="padding:2px 0;">小型啟動計畫／短期顧問包</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>高價客製商品</strong>
+                                <ul style="list-style:none;padding-left:0;font-size:0.85rem;color:var(--gray-700);margin-top:4px;">
+                                    <li style="padding:2px 0;">長期 SEO 顧問與陪跑方案</li>
+                                    <li style="padding:2px 0;">全站改版與內容策略專案</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card open"><div class="card-header" onclick="toggleCard(this)">客戶管理</div>
                     <div class="card-body"><div id="clients"></div><button class="add-btn" onclick="showAddClient()">新增客戶</button></div>
                 </div>
@@ -82,15 +130,16 @@
                 <div id="learning"></div>
             </div>
             <div id="tab-tasks" class="tab-content">
-                <div class="header"><div class="header-label">Tasks</div><h1>待辦清單</h1></div>
+                <div class="header"><div class="header-label">Tasks</div><h1>行動清單</h1></div>
                 <div id="tasks"></div>
+                <button class="add-btn" style="margin-top:8px;" onclick="showAddAction()">新增行動項目</button>
             </div>
         </div>
         <nav class="tab-bar">
-            <a class="tab-item active" onclick="switchTab('joe', this)">Joe</a>
+            <a class="tab-item active" onclick="switchTab('joe', this)">JOE</a>
             <a class="tab-item" onclick="switchTab('status', this)">現狀</a>
-            <a class="tab-item" onclick="switchTab('learning', this)">學習</a>
-            <a class="tab-item" onclick="switchTab('tasks', this)">待辦</a>
+            <a class="tab-item" onclick="switchTab('learning', this)">學習藍圖</a>
+            <a class="tab-item" onclick="switchTab('tasks', this)">行動清單</a>
         </nav>
     </div>
     <div id="clientModal" class="modal">

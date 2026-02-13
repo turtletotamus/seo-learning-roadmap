@@ -376,8 +376,12 @@ async function loadTasks() {
     const { data } = await supabaseClient.from('tasks').select('*');
     const statusMap = {};
     if (data) data.forEach(item => statusMap[item.task_id] = item.completed);
+
+    const customRaw = localStorage.getItem('custom_actions_v1');
+    const customTasks = customRaw ? JSON.parse(customRaw) : [];
+    const allTasks = [...tasksData, ...customTasks];
     
-    const html = tasksData.map(task => `
+    const html = allTasks.map(task => `
         <div class="card open">
             <div class="card-header" onclick="toggleCard(this)">
                 <span style="font-size:0.85rem">${task.title}</span>
@@ -392,6 +396,7 @@ async function loadTasks() {
                     <input type="checkbox" ${statusMap[task.id] ? 'checked' : ''} onchange="toggleTask('${task.id}', this.checked)">
                     <span style="font-size:0.85rem">已完成</span>
                 </label>
+                ${task.custom ? `<button style="margin-top:8px;padding:6px 10px;font-size:0.75rem;border:1px solid var(--gray-300);background:white;cursor:pointer" onclick="deleteAction('${task.id}')">刪除這個行動</button>` : ''}
             </div>
         </div>
     `).join('');
@@ -401,6 +406,29 @@ async function loadTasks() {
 
 async function toggleTask(taskId, completed) {
     await supabaseClient.from('tasks').upsert({ task_id: taskId, completed: completed, updated_at: new Date() });
+}
+
+function showAddAction() {
+    const title = prompt('輸入行動項目標題');
+    if (!title) return;
+    const desc = prompt('簡單描述這個行動');
+    const stepsRaw = prompt('若要分步驟，請用換行分隔（可留空）') || '';
+    const steps = stepsRaw ? stepsRaw.split('\n').filter(s => s.trim()) : ['明確下一步，安排到行事曆'];
+    
+    const customRaw = localStorage.getItem('custom_actions_v1');
+    const customTasks = customRaw ? JSON.parse(customRaw) : [];
+    const id = 'custom-' + Date.now();
+    customTasks.push({ id, title, desc: desc || '', steps, custom: true });
+    localStorage.setItem('custom_actions_v1', JSON.stringify(customTasks));
+    loadTasks();
+}
+
+function deleteAction(id) {
+    const customRaw = localStorage.getItem('custom_actions_v1');
+    const customTasks = customRaw ? JSON.parse(customRaw) : [];
+    const next = customTasks.filter(t => t.id !== id);
+    localStorage.setItem('custom_actions_v1', JSON.stringify(next));
+    loadTasks();
 }
 
 // Initialize
